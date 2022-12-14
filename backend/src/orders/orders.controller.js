@@ -3,15 +3,14 @@ const { redirect } = require("express/lib/response");
 const res = require("express/lib/response");
 const path = require("path");
 
-// Use the existing order data
+
 const orders = require(path.resolve("src/data/orders-data"));
 
-// Use this function to assigh ID's when necessary
 const nextId = require("../utils/nextId");
 
 // TODO: Implement the /orders handlers needed to make the tests pass
 
-/* Validators */
+
 function validateOrderExists(request, response, next) {
     const { orderId } = request.params;
     const foundOrder = orders.find((order) => order.id === orderId);
@@ -31,22 +30,22 @@ function validateOrderBody(request, response, next) {
     if (!deliverTo || deliverTo === "") {
       return next({ status: 400, message: "Order must include a deliverTo" });
     }
-    // check if mobileNumber property is missing or empty
+
     if (!mobileNumber || mobileNumber === "") {
       return next({ status: 400, message: "Order must include a mobileNumber" });
     }
-    // check if dishes property is missing
+   
     if (!dishes) {
       return next({ status: 400, message: "Order must include at least one dish" });
     }
-    // check if dishes property is not an array or empty
+   
     if (!Array.isArray(dishes) || dishes.length === 0) {
       return next({
         status: 400,
         message: "Order must include at least one dish",
       });
     }
-    // check if a dish quantity property is missing, zero or less, or not an integer
+  
     dishes.map((dish, index) => {
       if (
           !dish.quantity ||
@@ -102,7 +101,7 @@ function validateStatusCheck(req, res, next) {
 };
 
 
-/* Middleware */
+
 function list(request, response) {
     response.json({ data: orders });
 }
