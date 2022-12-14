@@ -1,14 +1,14 @@
 const path = require("path");
 
-// Use the existing dishes data
+
 const dishes = require(path.resolve("src/data/dishes-data"));
 
-// Use this function to assign ID's when necessary
+
 const nextId = require("../utils/nextId");
 
 // TODO: Implement the /dishes handlers needed to make the tests pass
 
-/* Validators */
+
 function validateDishExists(request, response, next) {
     const { dishId } = request.params;
     const foundDish = dishes.find((dish) => dish.id === dishId);
@@ -69,7 +69,7 @@ function validateDishId(request, response, next) {
     });
 };
 
-/* Middleware */
+
 function list(request, response) {
     response.json({ data: dishes });
 }
