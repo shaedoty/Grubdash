@@ -26,7 +26,6 @@ function validateOrderExists(request, response, next) {
 
 function validateOrderBody(request, response, next) {
     const { data: { deliverTo, mobileNumber, dishes } = {} } = request.body;
-    // check if deliverTo property is missing or missing
     if (!deliverTo || deliverTo === "") {
       return next({ status: 400, message: "Order must include a deliverTo" });
     }
@@ -63,7 +62,6 @@ function validateOrderBody(request, response, next) {
 }
 
 function validateDestroyCheck(req, res, next) {
-    // check if status property of the order !== "pending"
     if(res.locals.order.status !== "pending") {
         return next({
             status: 400,
@@ -76,21 +74,18 @@ function validateDestroyCheck(req, res, next) {
 function validateStatusCheck(req, res, next) {
     const { orderId } = req.params;
       const { data: { id, status } = {} } = req.body;
-    // check if id of body does not match :orderId from the route
       if(id && id !== orderId) {
       return next({
         status: 400,
         message: `Order id does not match route id. Order: ${id}, Route: ${orderId}`
       })
     }
-    // check if status property is missing ot empty and if not pending preparing or out for delivery
       else if(!status || status === "" || (status !== "pending" && status !== "preparing" && status !== "out-for-delivery")) {
       return next({
         status: 400,
         message: "Order must have a status of pending, preparing, out-for-delivery, delivered"
       })
     }		
-    // check if status property of the existing order === "delivered
       else if(status === "delivered"){
       return next({
         status: 400,
