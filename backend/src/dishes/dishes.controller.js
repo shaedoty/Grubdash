@@ -92,16 +92,20 @@ function read(request, response) {
 }
 
 function update(req, res) {
-    const { data: { name, description, price, image_url } = {} } = req.body;
-    res.locals.dish = {
-      id: res.locals.dishId,
-      name: name,
-      description: description,
-      price: price,
-      image_url: image_url,
-    };
-    res.json({ data: res.locals.dish });
-  };
+  const dishId = req.params.dishId;
+   let {
+     data: { name, description, price, image_url },
+   } = req.body;
+   let updatedDish = {
+     id: dishId,
+     name: req.body.data.name,
+     description: req.body.data.description,
+     price: req.body.data.price,
+     image_url: req.body.data.image_url,
+   };
+   return res.json({ data: updatedDish });
+ }
+
 
 module.exports = {
     list,
