@@ -118,18 +118,19 @@ function read(request, response) {
     response.json({ data: response.locals.order });
 }
 
-function update(request, response) {
-    const { data: { deliverTo, mobileNumber, dishes, status } = {} } = request.body;
-    response.locals.order = {
-        id: response.locals.order.id,
-        deliverTo: deliverTo,
-        mobileNumber: mobileNumber,
-        dishes: dishes,
-        status: status,
+function update(req, res) {
+    const orderId = req.params.orderId;
+    let { data: id, deliverTo, mobileNumber, status, dishes } = req.body;
+    let updatedOrder = {
+      id: orderId,
+      deliverTo: req.body.data.deliverTo,
+      mobileNumber: req.body.data.mobileNumber,
+      status: req.body.data.status,
+      dishes: req.body.data.dishes,
     };
-    response.json({ data: response.locals.order });
-};
   
+    return res.json({ data: updatedOrder });
+  }
 
 function destroy(request, response) {
     const index = orders.indexOf(response.locals.order);
