@@ -8,14 +8,14 @@
       "url": "https://github.com/shaedoty/Grubdash"
     },
     "scripts": {
-      "build": "npm -prefix client run build",
+      "build": "npm -prefix frontend run build",
       "preinstall": "cd ./backend && npm install",
-      "install": "cd ./client && npm install",
-      "start": "npx concurrently 'npm run start:backend' 'npm run start:client'",
+      "install": "cd ./frontend && npm install",
+      "start": "npx concurrently 'npm run start:backend' 'npm run start:frontend'",
       "start:backend": "npm --prefix ./backend start",
-      "start:client": "npm --prefix ./client start",
-      "start:dev": "npx concurrently 'npm run start:dev --prefix ./backend' 'npm start --prefix ./client'",
-      "test": "npm run test:client && npm run test:backend"
+      "start:frontend": "npm --prefix ./frontend start",
+      "start:dev": "npx concurrently 'npm run start:dev --prefix ./backend' 'npm start --prefix ./frontend'",
+      "test": "npm run test:frontend && npm run test:backend"
     },
     "keywords": [],
     "author": "",
