@@ -1,7 +1,7 @@
 {
-    "name": "GrubDash",
+    "name": "grubdash",
     "version": "1.0.0",
-    "description": "Starter project name generator",
+    "description": "grubdash",
     "private": true,
     "repository": {
       "type": "git",
